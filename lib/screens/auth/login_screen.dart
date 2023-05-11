@@ -31,6 +31,28 @@ class _LoginScreenState extends State<LoginScreen> {
     return null;
   }
 
+
+  class SecondRoute extends StatelessWidget {
+  const SecondRoute({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Second Route'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Go back!'),
+        ),
+      ),
+    );
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                 ),
                 const SizedBox(height: 16),
-                const Text('Please login to access and start shopping'),
+                const Text('Please login to access'),
                 const SizedBox(height: 32),
                 Form(
                   key: _formKey,
@@ -119,19 +141,68 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: const Text('Log in'),
                 ),
-                const SizedBox(height: 16),
-                RichText(
-                  text: TextSpan(
-                    text: "Don't have an account? ",
-                    style: const TextStyle(color: Colors.black),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Sign up',
-                        style: const TextStyle(color: Color(0xFF3D80DE)),
-                        recognizer: TapGestureRecognizer()..onTap = () {},
-                      ),
-                    ],
+                const SizedBox(height: 25),
+                // RichText(
+                //   text: TextSpan(
+                //     text: "Registar here ",
+                //     style: const TextStyle(color: Colors.black),
+                //     children: <TextSpan>[
+                //       TextSpan(
+                //         text: 'Sign up',
+                //         style: const TextStyle(color: Color(0xFF3D80DE)),
+                //         recognizer: TapGestureRecognizer()..onTap = () {},
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Dialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40)),
+                          elevation: 18,
+                          child: Container(
+                            child: ListView(
+                              shrinkWrap: true,
+                              children: <Widget>[
+                                SizedBox(height: 20),
+                                Center(
+                                    child: Text(
+                                  'Please enter your email to register',
+                                  style: TextStyle(height: 2, fontSize: 20),
+                                )),
+                                SizedBox(height: 20),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    hintText: 'Enter email',
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    primary: Colors.blue,
+                                  ),
+                                  onPressed: () {},
+                                  child: Text('Submit'),
+                                ),
+                                SizedBox(height: 20)
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.black),
+                    minimumSize: MaterialStateProperty.all(
+                        const Size(double.infinity, 48)),
                   ),
+                  child: const Text('Register'),
                 ),
               ],
             ),
